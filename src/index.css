@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+}
+
+html, body, #root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  background: #02040a;
+  color: #e6f1ff;
+  overflow-x: hidden;
+}
+
+* { box-sizing: border-box; }
+
+.space-night {
+  position: relative;
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(30,58,138,0.35), transparent 45%),
+    radial-gradient(ellipse at 80% 10%, rgba(12,74,110,0.30), transparent 35%),
+    radial-gradient(ellipse at 50% 100%, rgba(15,23,42,0.9), #02040a 60%),
+    #02040a;
+}
+
+.space-night::before,
+.space-night::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.space-night::before {
+  background-image:
+    radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.9) 50%, transparent 51%),
+    radial-gradient(1px 1px at 30% 80%, rgba(255,255,255,0.7) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 50% 30%, rgba(186,230,253,0.9) 50%, transparent 51%),
+    radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,0.8) 50%, transparent 51%),
+    radial-gradient(1px 1px at 90% 25%, rgba(255,255,255,0.7) 50%, transparent 51%),
+    radial-gradient(1px 1px at 15% 65%, rgba(255,255,255,0.6) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 85% 75%, rgba(125,211,252,0.8) 50%, transparent 51%),
+    radial-gradient(1px 1px at 40% 10%, rgba(255,255,255,0.8) 50%, transparent 51%),
+    radial-gradient(1px 1px at 60% 90%, rgba(255,255,255,0.6) 50%, transparent 51%),
+    radial-gradient(1px 1px at 25% 45%, rgba(255,255,255,0.75) 50%, transparent 51%);
+  background-size: 320px 320px;
+  opacity: 0.7;
+  animation: starDrift 90s linear infinite;
+}
+
+.space-night::after {
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.8) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 75% 15%, rgba(224,242,254,0.9) 50%, transparent 51%),
+    radial-gradient(1px 1px at 55% 55%, rgba(255,255,255,0.7) 50%, transparent 51%),
+    radial-gradient(1px 1px at 35% 75%, rgba(255,255,255,0.6) 50%, transparent 51%),
+    radial-gradient(1px 1px at 95% 50%, rgba(255,255,255,0.8) 50%, transparent 51%);
+  background-size: 460px 460px;
+  opacity: 0.45;
+  animation: twinkle 6s ease-in-out infinite alternate, starDrift 140s linear infinite reverse;
+}
+
+@keyframes starDrift {
+  from { transform: translateY(0); }
+  to { transform: translateY(-40px); }
+}
+
+@keyframes twinkle {
+  from { opacity: 0.25; }
+  to { opacity: 0.6; }
+}
+
+.glass {
+  background: rgba(8, 15, 30, 0.62);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(56, 189, 248, 0.18);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 rgba(56,189,248,0.0), 0 0 0 rgba(56,189,248,0.0); }
+  50% { box-shadow: 0 0 24px rgba(56,189,248,0.18), 0 0 60px rgba(14,165,233,0.08); }
+}
+.animate-glow { animation: pulseGlow 4s ease-in-out infinite; }
+
+@keyframes floatY {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+.float-y { animation: floatY 6s ease-in-out infinite; }
+
+@keyframes scan {
+  0% { transform: translateY(-100%); opacity: 0; }
+  20% { opacity: 0.35; }
+  100% { transform: translateY(200%); opacity: 0; }
+}
+.scanline::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 30%;
+  background: linear-gradient(to bottom, transparent, rgba(56,189,248,0.08), transparent);
+  animation: scan 6s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(8px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(8px) rotate(-360deg); }
+}
+.orbit-dot { animation: orbit 8s linear infinite; }
+
+@keyframes roverMove {
+  0% { transform: translateX(0); }
+  45% { transform: translateX(28px); }
+  50% { transform: translateX(28px) scaleX(-1); }
+  95% { transform: translateX(0) scaleX(-1); }
+  100% { transform: translateX(0) scaleX(1); }
+}
+.rover-move { animation: roverMove 12s ease-in-out infinite; transform-origin: center; }
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.04); opacity: 1; }
+}
+.breathe { animation: breathe 4s ease-in-out infinite; }
